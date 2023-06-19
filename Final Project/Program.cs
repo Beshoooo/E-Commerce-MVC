@@ -1,4 +1,5 @@
 using Final_Project.Models;
+using Final_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,10 @@ namespace Final_Project
             builder.Services.AddDbContext<MyContext>(o => 
             o.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
+            
+
+            //builder.Services.AddTransient<IMailService, MailService>();
+            //builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -32,6 +32,7 @@ namespace Final_Project.Models
                 NormalizedUserName = "admin@gmail.com".ToUpper(),
                 Address = "Cairo",
                 LockoutEnabled = true,
+                RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
 
             };
             var hasher = new PasswordHasher<ApplicationUser>();

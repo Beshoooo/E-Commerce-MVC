@@ -1,8 +1,12 @@
 ﻿using Final_Project.Models;
+using Final_Project.Services;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Text;
+using System.Net;
+using System.Net.Mail;
 
 namespace Final_Project.Controllers
 {
@@ -10,11 +14,15 @@ namespace Final_Project.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        //private readonly IMailService _mailService;
 
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+            //_mailService = mailService;
         }
 
         #region Register
@@ -41,13 +49,17 @@ namespace Final_Project.Controllers
                 newUser.Email = registerVM.Email;
                 newUser.UserName = registerVM.UserName;
                 newUser.PasswordHash = registerVM.Password;
+                newUser.RoleId = _roleManager.Roles.FirstOrDefault(r => r.Name == "User").Id;
+
 
                 var result = await _userManager.CreateAsync(newUser, registerVM.Password);
                 if (result.Succeeded)
                 {
                     //Assign to user role
-                    await _userManager.AddToRoleAsync(newUser, "User"); 
-                    
+                    await _userManager.AddToRoleAsync(newUser, "User");
+
+
+
                     //create cookie
                     await _signInManager.SignInAsync(newUser, isPersistent: false);
                     return RedirectToAction("Login");
@@ -58,7 +70,7 @@ namespace Final_Project.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-                    
+
                 }
             }
             return View(registerVM);
@@ -76,7 +88,7 @@ namespace Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel LoginVM)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(LoginVM.Email);
                 if (user == null)
@@ -85,13 +97,13 @@ namespace Final_Project.Controllers
                 }
                 else
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, LoginVM.Password,LoginVM.RememberMe,false);
-                    if(result.Succeeded)
+                    var result = await _signInManager.PasswordSignInAsync(user, LoginVM.Password, LoginVM.RememberMe, false);
+                    if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
                     }
                     else
-                    {ModelState.AddModelError("", "UserName or Password is wrong");}
+                    { ModelState.AddModelError("", "UserName or Password is wrong"); }
                 }
             }
             return View();
@@ -106,5 +118,26 @@ namespace Final_Project.Controllers
             return RedirectToAction("Login");
         }
         #endregion
+
+
+        #region ResetPassword
+
+        //public IActionResult ResetPassword(MailData mailData)
+        //{
+
+
+
+        //    mailData.EmailToId = "m.azzazzy@gmail.com";
+        //    mailData.EmailSubject = "testt";
+        //    mailData.EmailToName = "Azzazi";
+        //    mailData.EmailBody = "loremloremloremloremloremloremloremlorem";
+
+        //    _mailService.SendMail(mailData);
+
+        //    return View();
+        //}
+
+        #endregion
+
     }
 }
