@@ -1,5 +1,7 @@
 using Final_Project.Models;
+using Final_Project.Repository;
 using Final_Project.Services;
+using Final_Project.ViewModelRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +27,9 @@ namespace Final_Project
             builder.Services.AddDbContext<MyContext>(o => 
             o.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
-            
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IProductWithDepartmentName, ProductsWithDepartmentNameRepo>();
 
             //builder.Services.AddTransient<IMailService, MailService>();
             //builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));

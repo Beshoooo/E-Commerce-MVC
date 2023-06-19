@@ -99,19 +99,84 @@ namespace Final_Project.Migrations
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
                             Address = "Cairo",
-                            ConcurrencyStamp = "ace11db2-25b1-4844-89ab-0427727e35d3",
+                            ConcurrencyStamp = "7737034d-3ae8-4471-8e0e-2f63b5da4108",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEECtTsLHWOncnZzJLd79jf4kB7pXunGk0pUMcoRHldDumMaxleedpDkBJRhQYoD0tg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOoXqq923esVpTRcHHvkxz/cvWqnXsESf95jlRnLpoG9vnnBGWeHFrbITye2jxtAYw==",
                             PhoneNumberConfirmed = false,
                             RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
-                            SecurityStamp = "1182e588-5895-42e6-8da5-71281b24036e",
+                            SecurityStamp = "b76ceb4c-bf66-4833-909d-1aa76080b0ba",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
+                });
+
+            modelBuilder.Entity("Final_Project.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DepartmentIcon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DeptManger")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DeptManger_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Is_Deleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("Final_Project.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DeptId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Is_Deleted")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductName")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeptId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -150,7 +215,7 @@ namespace Final_Project.Migrations
                         },
                         new
                         {
-                            Id = "91ab4b97-27ec-47fe-b666-e80939102090",
+                            Id = "e236331b-5a07-4e4e-8203-8d647c2521bd",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -269,6 +334,15 @@ namespace Final_Project.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Final_Project.Models.Product", b =>
+                {
+                    b.HasOne("Final_Project.Models.Department", "Department")
+                        .WithMany("Products")
+                        .HasForeignKey("DeptId");
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -318,6 +392,11 @@ namespace Final_Project.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Final_Project.Models.Department", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

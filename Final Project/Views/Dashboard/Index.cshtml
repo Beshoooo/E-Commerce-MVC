@@ -1,0 +1,57 @@
+﻿
+@model List<ProductsWithDepartmentName>
+@{
+    ViewData["Title"] = "Index";
+
+    //Layout = "_ProductsLayout";
+}
+
+<div class="category-top box-style">
+
+    <form class="search-form" action="/Dashboard/Search" method="post">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" placeholder="Search" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+@Html.ActionLink("Add New Product", "New", "Product",null,new{@class="btn btn-outline-success"})
+<br />
+<br />
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+            
+            <td>Name</td>
+            <td>Price</td>
+            <td>Img</td>
+            <td>Description</td>
+            <td>Department Name</td>
+            <td>Action</td>
+            
+        </tr>
+    </thead>
+    @foreach (ProductsWithDepartmentName item in Model)
+    {
+        <tr>
+            <td>@item.ProductName</td>
+            <td>@item.Price</td>
+            <td><img src="/images/@item.Img" style="width:100px;height:100px" /></td>
+            <td>@item.Description</td>
+            <td>@item.DepartmentName</td>
+            <td>
+                @Html.ActionLink("Remove", "Remove","Product", new { id = item.Id } ,
+            new { @class = "btn btn-outline-danger",
+            onclick = $"return confirm('Are you sure you want to delete {item.ProductName} form Products?')"
+            })
+                <a class="btn btn-outline-warning" href="/Product/edit/@item.Id">Edit</a>
+            </td>
+        </tr>
+
+
+    }
+
+</table>
+

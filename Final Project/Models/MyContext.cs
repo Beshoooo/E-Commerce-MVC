@@ -8,11 +8,15 @@ namespace Final_Project.Models
     public class MyContext:IdentityDbContext<ApplicationUser>
     {
 
-        public MyContext():base()
+		public DbSet<Product> Products { get; set; }
+		public DbSet<Department> Departments { get; set; }
+
+		public MyContext():base()
         {}
         public MyContext(DbContextOptions<MyContext> options)
         : base(options)
         {}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

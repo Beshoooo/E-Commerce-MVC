@@ -1,0 +1,47 @@
+﻿@model Product
+
+@{
+    Layout = "_ProductsLayout";
+    ViewData["Title"] = "GetById";
+}
+
+<h1 class="mb-5">Product Details</h1>
+<br />
+<br />
+<div class="container">
+    <dl class="row">
+        <dt class = "col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt class="col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt class="col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.Img)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            <img src="~/images/@Model.Img" style="width:220px; height:250px" alt="Current Image" />
+        </dd>
+        
+        <dt class="col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-warning" >Buy Now</a> |
+    <a class="btn btn-outline-success" asp-action="Index">Back to All Products </a> | 
+    <a class="btn btn-outline-success" asp-controller="Department" asp-action="Index">Back to Home </a>
+</div>

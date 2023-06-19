@@ -1,0 +1,53 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "GetById";
+}
+
+<h1>Category Details</h1>
+<hr />
+<div class=" justify-content-center align-content-center">
+    <dl class="row">
+        <dt class = "col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+        <dt class="col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.DepartmentIcon)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            <i class="lni lni-@Model.DepartmentIcon"></i>
+        </dd>
+        <dt class="col-sm-4 mb-2">
+            @Html.DisplayNameFor(model => model.DeptManger)
+        </dt>
+        <dd class="col-sm-8 mb-2">
+            @Html.DisplayFor(model => model.DeptManger)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-warning" asp-controller="Department" asp-action="Edit" asp-route-id="@ViewBag.id">Edit</a> |
+    <a class="btn btn-outline-danger" asp-controller="Department" asp-action="Remove" asp-route-id="@ViewBag.id">Delete</a> |
+    <a class="btn btn-outline-success" asp-action="Index">Back to Home </a> |
+    <a href="#" onclick="display(@ViewBag.id)" class="btn btn-secondary">Show All Products</a>
+</div>
+<div id="TCPartilal" class="m-auto">
+</div>
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        function display(deptId) {
+            event.preventDefault();
+            $.ajax({
+                url: "/Department/PartialProductResult",
+                data: { deptId: deptId },
+                success: function (result) {
+                    $('#TCPartilal').html(result);
+                }
+            });
+        }
+    </script>
+}

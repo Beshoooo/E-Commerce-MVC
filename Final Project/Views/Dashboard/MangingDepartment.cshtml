@@ -1,0 +1,80 @@
+﻿@model List<Department>
+@{
+    ViewData["Title"] = "Index";
+
+
+}
+
+
+
+<div class="category-top box-style">
+    <form class="search-form" action="/Dashboard/SearchDepartment" method="post">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" placeholder="Search" required>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@Html.ActionLink("Add New Department", "New", "Department",null,new{@class="btn btn-outline-success"})
+<br />
+<br />
+<table class="table table-bordered text-center">
+    <thead>
+        <tr>
+
+            <td>Name</td>
+            <td>Icon</td>
+            <td>Manger Name</td>
+            <td>Action</td>   
+
+        </tr>
+    </thead>
+    @foreach (Department item in Model)
+    {
+        <tr>
+            <td>@item.DepartmentName</td>
+            <td><i class="lni lni-@item.DepartmentIcon"></i></td>
+            <td>@item.DeptManger</td>
+            <td>
+                @Html.ActionLink("Remove", "Remove","Department", new { id = item.Id } ,
+
+
+            new { @class = "btn btn-danger",
+            onclick = $"return confirm('Are you sure you want to delete {item.DepartmentName} form Department?')"
+            })
+                | <a class="btn btn-warning" href="/Department/edit/@item.Id">Edit</a> |
+                <a href="#" onclick="display(@item.Id)" class="btn btn-secondary">Show All Products</a>
+            </td>
+        </tr>
+
+
+    }
+
+</table>
+<br />
+<br />
+<br />
+<div id="TCPartilal" class="m-auto">
+</div>
+<br />
+<br />
+<br />
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        function display(deptId) {
+            event.preventDefault();
+            $.ajax({
+                url: "/Department/PartialProductResult",
+                data: { deptId: deptId },
+                success: function (result) {
+                    $('#TCPartilal').html(result);
+                }
+            });
+        }
+    </script>
+}

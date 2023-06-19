@@ -1,0 +1,77 @@
+﻿@model Product
+
+@{
+    Layout = "_ProductsLayout";
+    ViewData["Title"] = "New";
+    SelectList Deptlist = new SelectList(ViewBag.DeptList, "Id", "DepartmentName");
+}
+
+<hr />
+<div class="row">
+    <div class="text-center">
+        <form method="post" asp-action="SaveEdit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" value="@Model.Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" required />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" required />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-5">
+                <label asp-for="Img" class="control-label"></label>
+                <input asp-for="Img" name="imageFile" type="file" class="form-control" accept="images/*" value="@Model.Img" />
+                @*<input asp-for="Img" type="file" name="imageFile" id="imageFile" accept="images/*" onchange="updateFileName()" />*@
+                @if (!string.IsNullOrEmpty(Model.Img))
+                {
+                    <p>Current Image:</p>
+                    <img src="~/images/@Model.Img" style="width:250px ;height:200px" alt="Current Image" />
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptId" class="control-label"></label> 
+                <select asp-for="DeptId" class="form-control" asp-items="Deptlist">
+                    <option value="0">--select Department--</option>
+                </select>
+            </div>
+
+            <div class="form-group m-5">
+                <input type="submit" value="Save" class="btn btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-warning" asp-controller="Dashboard" asp-action="Index">Return to Manage Products</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>    
+        function updateFileName() {
+            var input = document.getElementById("imageFile");
+            var fileName = input.files[0].name;
+            var hiddenInput = document.getElementsByName("@Model.Img")[0];
+            hiddenInput.value = fileName;
+        }
+        </script>
+}
+

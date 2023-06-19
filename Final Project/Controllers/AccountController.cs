@@ -100,7 +100,7 @@ namespace Final_Project.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, LoginVM.Password, LoginVM.RememberMe, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Department");
                     }
                     else
                     { ModelState.AddModelError("", "UserName or Password is wrong"); }

@@ -1,0 +1,68 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<h1>New</h1>
+
+<h4>Department</h4>
+<hr />
+<div class="row">
+        <div class="col-md-10 m-auto">
+            <form method="post" asp-action="SaveAdd">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DepartmentName" class="control-label"></label>
+                <input asp-for="DepartmentName" class="form-control" required />
+                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartmentIcon" class="control-label"></label>
+                    <select asp-for="DepartmentIcon" class="form-control">
+                        <option value="">---Select Icon---</option>
+                        <option value="bi-cycle">bicycle</option>
+                        <option value="book">book</option>
+                        <option value="camera">camera</option>
+                        <option value="car">car</option>
+                        <option value="tshirt">clothing</option>
+                        <option value="display">Electronics</option>
+                        <option value="windows">PC</option>
+                        <option value="gift">gift</option>
+                        <option value="headphone">Headphones</option>
+                        <option value="home">furniture</option>
+                        <option value="music">Music</option>
+                        <option value="pencil">pencil</option>
+                        <option value="basketball">Sports</option>
+                        <option value="travel">Travel</option>
+                        <option value="wallet">Wallet</option>
+                        <option value="mobile">phones</option>
+                    </select>
+                    <span asp-validation-for="DepartmentIcon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeptManger" class="control-label"></label>
+                <input asp-for="DeptManger" class="form-control" required />
+                    <span asp-validation-for="DeptManger" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-outline-success" />
+                </div>
+            </form>
+        </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-warning" asp-controller="Dashboard" asp-action="MangingDepartment">Return to Manage Depatments</a>
+    <br />
+    <br />
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

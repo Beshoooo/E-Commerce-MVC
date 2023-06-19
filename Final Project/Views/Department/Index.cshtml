@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="category-list-wrapper ">
+@foreach (var item in Model) {
+		<div class="category-list-item">
+			<a asp-controller="Product" asp-action="GetProdByDept" asp-route-deptid="@item.Id">
+				<div class="icon">
+					<i class="lni lni-@item.DepartmentIcon"></i>
+				</div>
+				<h3>@item.DepartmentName</h3>
+			</a>
+		</div>
+	}
+</div>
+<br />
+<br />
+<br />
+
+<!--====== LATEST PRODUCT PART START ======-->
+<hr  />
+<div class="row ">
+	<div class="mx-auto col-xl-6 col-lg-7 col-md-10">
+		<div class="text-center section-title mb-60">
+			<h1 class="m-5">Latest Products</h1>
+		</div>
+	</div>
+</div>
+<!--====== LATEST PRODUCT PART ENDS ======-->
+<div class="col-lg-12">
+	<div class="cards-wrapper">
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+				<div class="row">
+					@foreach (ProductsWithDepartmentName item in ViewBag.ProductsList)
+					{
+						<div class="col-lg-3 col-md-3">
+							<div class="single-product" style="height:75vh">
+								<div class="product-img">
+										<img src="~/images/@item.Img"  class="card-img-top" style="height:40vh" alt="Current Image" />
+											<div class="product-action">
+												<a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+												<a href="javascript:void(0)" class="share"><i class="lni lni-share"></i></a>
+											</div>
+								</div>
+								<div class="product-content">
+									<h3 class="name" style="height:5vh">@item.ProductName | <span class="update" style="height:2vh;font:100;font-size:1.2rem;color:brown">@item.DepartmentName</span></h3>
+									<span class="update" style="height:5vh">@item.Description</span>
+									<div class="product-bottom " style="height:8vh">
+										<h3 class="price">$@item.Price</h3> | 
+										<a class="btn btn-outline-warning">Buy Now</a> 
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

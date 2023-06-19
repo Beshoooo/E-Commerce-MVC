@@ -1,0 +1,37 @@
+﻿@model List<Product>
+<br />
+<hr />
+<br />
+<br />
+<a class="btn btn-outline-warning" asp-controller="Dashboard" asp-action="Index">Manage Products</a>
+<br />
+<br />
+<div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+	<div class="row">
+@foreach (var item in Model)
+{
+	<div class="col-lg-3 col-md-3">
+				<div class="single-product" style="height:70vh">
+			<div class="product-img">
+				<a asp-action="GetById" class="btn" asp-route-id="@item.Id">
+					<img src="~/images/@item.Img" class="card-img-top" style="height:40vh" alt="Current Image" />
+				</a>
+				<div class="product-action">
+					<a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+					<a href="javascript:void(0)" class="share"><i class="lni lni-share"></i></a>
+				</div>
+			</div>
+			<div class="product-content">
+				<h3 class="name"><a asp-action="GetById" asp-route-id="@item.Id">@item.ProductName</a></h3>
+				<span class="update">@item.Description</span>
+				<span class="update">@item.Department</span>
+				<div class="product-bottom">
+					<h3 class="price">$@item.Price</h3>
+							<a class="btn btn-outline-warning" href="/Product/edit/@item.Id">Edit</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+</div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+
+@{
+    Layout = "_ProductsLayout";
+    ViewData["Title"] = "Index";
+}
+
+
+<br />
+@foreach (var item in Model) {
+		<div class="col-lg-6 col-md-6">
+			<div class="single-product" style="height:80VH">
+				<div class="product-img">
+					<a asp-action="GetById" class="btn btn-outline-primary" asp-route-id="@item.Id">
+						<img src="~/images/@item.Img" class="card-img-top" style="height:48vh" alt="Current Image" />
+					</a>
+					<div class="product-action">
+						<a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
+						<a href="javascript:void(0)" class="share"><i class="lni lni-share"></i></a>
+					</div>
+				</div>
+				<div class="product-content">
+					<h3 class="name"><a asp-action="GetById" asp-route-id="@item.Id">@item.ProductName</a></h3>
+					<span class="update">@item.Description</span>
+					<span class="update">@item.Department</span>
+					<div class="product-bottom">
+						<h3 class="price">$@item.Price</h3> | 
+						<a class="btn btn-outline-warning">Buy Now</a> 
+					</div>
+				</div>
+			</div>
+		</div>
+}
