@@ -31,7 +31,7 @@
             <td>@item.PhoneNumber</td>
             <td>
 
-                <select class="form-control role-select" data-user-id="@item.Id">
+                <select class="form-select role-select" data-user-id="@item.Id">
                     @foreach (var role in ViewBag.Roles)
                     {
                         if (role.Name == "Admin")

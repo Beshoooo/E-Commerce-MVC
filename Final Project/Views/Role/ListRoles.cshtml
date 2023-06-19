@@ -28,13 +28,10 @@
                     
                     
                     <span id="DeleteSpan_@role.Id">
-                        <a onclick="confirmDelete('@role.Id',true)" href="#" class="btn btn-danger">Delete</a>
+                        <a data-role-id="@role.Id" class="btn btn-danger delete">Delete</a>
                     </span>
-                    <span id="ConfirmDeleteSpan_@role.Id" style="display:none">
-                        <span>Are you sure you want to delete user ? </span>
-                        <button type="submit" class="btn btn-danger">Yes</button>
-                        <a onclick="confirmDelete('@role.Id',false)" href="#" class="btn btn-primary">No</a>
-                    </span>
+
+
                     
                 </form>
             </div>
@@ -55,3 +52,35 @@ else
     </div>
 
 }
+
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.delete').click(function () {
+                var roleId = $(this).data('role-id');
+
+                if (confirm('Are you sure you want to delete this role?')) {
+                    $.ajax({
+                        url: '/Role/DeleteRole',
+                        type: 'POST',
+                        data: { RoleId: roleId },
+                        success: function (response) {
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+        });
+
+    </script>
+    }

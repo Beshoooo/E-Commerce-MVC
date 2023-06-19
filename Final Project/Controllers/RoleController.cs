@@ -56,6 +56,36 @@ namespace Final_Project.Controllers
         #endregion
 
 
+        #region Delete Role
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string RoleId)
+        {
+            var role = await _roleManager.FindByIdAsync(RoleId);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with id : {RoleId} can't be found.";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index","Role");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+
+                    }
+                    return RedirectToAction("ListRoles");
+                }
+            }
+        }
+        #endregion
+
         #region ListRoles
         [HttpGet]
         public IActionResult ListRoles()

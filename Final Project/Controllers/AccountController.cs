@@ -62,7 +62,7 @@ namespace Final_Project.Controllers
 
                     //create cookie
                     await _signInManager.SignInAsync(newUser, isPersistent: false);
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Index","Department");
                 }
                 else
                 {
@@ -138,6 +138,9 @@ namespace Final_Project.Controllers
         //}
 
         #endregion
+
+
+
 
     }
 }
