@@ -1,5 +1,5 @@
 ﻿using Final_Project.Models;
-using Final_Project.Services;
+
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +15,13 @@ namespace Final_Project.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        //private readonly IMailService _mailService;
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            //_mailService = mailService;
+
         }
 
         #region Register
@@ -62,7 +61,7 @@ namespace Final_Project.Controllers
 
                     //create cookie
                     await _signInManager.SignInAsync(newUser, isPersistent: false);
-                    return RedirectToAction("Index","Department");
+                    return RedirectToAction("Index", "Department");
                 }
                 else
                 {
@@ -124,24 +123,6 @@ namespace Final_Project.Controllers
         #endregion
 
 
-        #region ResetPassword
-
-        //public IActionResult ResetPassword(MailData mailData)
-        //{
-
-
-
-        //    mailData.EmailToId = "m.azzazzy@gmail.com";
-        //    mailData.EmailSubject = "testt";
-        //    mailData.EmailToName = "Azzazi";
-        //    mailData.EmailBody = "loremloremloremloremloremloremloremlorem";
-
-        //    _mailService.SendMail(mailData);
-
-        //    return View();
-        //}
-
-        #endregion
 
     }
 }
