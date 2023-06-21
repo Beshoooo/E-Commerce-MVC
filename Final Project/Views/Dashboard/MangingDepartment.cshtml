@@ -45,8 +45,8 @@
             new { @class = "btn btn-danger",
             onclick = $"return confirm('Are you sure you want to delete {item.DepartmentName} form Department?')"
             })
-                | <a class="btn btn-warning" href="/Department/edit/@item.Id">Edit</a> |
-                <a href="#" onclick="display(@item.Id)" class="btn btn-secondary">Show All Products</a>
+                | <a class="btn btn-outline-warning" href="/Department/edit/@item.Id">Edit</a> |
+                <a href="#" onclick="display(@item.Id)" class="btn btn-outline-secondary">Show All Products</a>
             </td>
         </tr>
 
@@ -77,4 +77,12 @@
             });
         }
     </script>
+}
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
 }

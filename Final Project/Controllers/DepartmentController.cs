@@ -42,13 +42,14 @@ namespace Final_Project.Controllers
         }
 
         [HttpGet]
-
+        [Authorize(Roles = "Admin,SV")]
         public IActionResult New()
         {
            
             return View(new Department());
         }
         [HttpPost]//Form 
+        [Authorize(Roles = "Admin,SV")]
         public IActionResult SaveAdd(Department dept)
         {
             if (ModelState.IsValid&&dept!=null)
@@ -57,7 +58,7 @@ namespace Final_Project.Controllers
                 {
                     departmentRepository.Add(dept);
                     departmentRepository.Save();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("MangingDepartment","Dashboard");
                 }
                 catch (Exception ex)
                 {
@@ -67,6 +68,7 @@ namespace Final_Project.Controllers
             return View("New", dept);
         }
 
+        [Authorize(Roles = "Admin,SV")]
         public IActionResult Edit(int id)
         {
 
@@ -78,6 +80,7 @@ namespace Final_Project.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,SV")]
         public IActionResult SaveEdit(int id, Department newdept)
         {
 
@@ -96,6 +99,8 @@ namespace Final_Project.Controllers
             //ViewData["prodList"] = db.Products.ToList();
             return View("Edit", newdept);
         }
+
+        [Authorize(Roles = "Admin,SV")]
         public IActionResult Remove(int id)
         {
 

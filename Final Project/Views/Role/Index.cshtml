@@ -2,8 +2,17 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container">
-    <a href="/Role/CreateRole">Add New Role</a>
-    <a href="/Role/ListRoles">List of Roles</a>
-    <a href="/UserRoles/ViewUsers">List of Users</a>
+<div class="container d-flex justify-content-start align-items-center"style="height:60vh">
+
+    <a class="btn btn-outline-danger m-5" href="/Role/ListRoles">List of Roles</a> |
+
+    <a class="btn btn-outline-danger m-5" href="/UserRoles/ViewUsers">List of Users</a>
 </div>
+@section Nav{
+	<li class="nav-item">
+		<a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+	</li>
+	<li class="nav-item">
+		<a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+	</li>
+}

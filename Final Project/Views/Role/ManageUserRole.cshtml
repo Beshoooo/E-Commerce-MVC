@@ -5,8 +5,8 @@
     var UserId = ViewBag.UserId;
 }
 
-<form method="post">
-    <div class="card mt-3">
+<form method="post" style="height:60vh">
+    <div class="card m-3">
         <div class="card-header">
             Manage User Roles
         </div>
@@ -30,9 +30,17 @@
 
         </div>
         <div class="card-footer">
-            <input type="submit" asp-route-UserId="@UserId" class="btn btn-primary" value="Update">
+            <input type="submit" asp-route-UserId="@UserId" class="btn btn-outline-warning" value="Update">
             <a asp-controller="Role" asp-action="EditUser"
-               asp-route-ID="@UserId" class="btn btn-light">Cancel</a>
+               asp-route-ID="@UserId" class="btn btn-outline-success">Cancel</a>
         </div>
     </div>
 </form>
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
+}

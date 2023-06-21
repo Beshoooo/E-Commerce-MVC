@@ -63,13 +63,74 @@
 
 	<!--====== PRELOADER PART ENDS ======-->
 	<!--====== HEADER PART START ======-->
-
-	<header class="header_area">
+	<!--====== HEADER PART START ======-->
+	<header class="header_area fw-bold">
 		<div id="header_navbar" class="header_navbar">
 			<div class="container position-relative">
 				<div class="row align-items-center">
 					<div class="col-xl-12">
-						<partial name="_NavPartial" />
+						<nav class="navbar navbar-expand-lg">
+							<a asp-controller="Department" asp-action="Index">
+								<img style="width:50px;height:50px;" src="/images/download.png" alt="Logo">
+							</a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+								<ul id="nav" class="navbar-nav">
+									@RenderSection("Nav",required:false)
+
+
+									@if (User.IsInRole("Admin") || User.IsInRole("SV"))
+									{
+										<li class="nav-item">
+											<a class="text-danger fw-bold m-2" data-toggle="collapse" data-target="#sub-nav" aria-controls="sub-nav"
+											   aria-expanded="false" aria-label="Toggle navigation" href="javascript:void(0)">
+												Dashboard
+												<div class="sub-nav-toggler">
+													<span></span>
+												</div>
+											</a>
+											<ul class="sub-menu collapse" id="sub-nav">
+												@if (User.IsInRole("Admin"))
+												{
+													<li class="nav-item">
+														<a class="text-danger fw-bold m-2" asp-area="" asp-controller="Role" asp-action="Index">Management</a>
+													</li>
+												}
+												<li><a class="text-danger fw-bold m-2" asp-controller="Dashboard" asp-action="MangingDepartment">Manging Categories</a></li>
+												<li><a class="text-danger fw-bold m-2" asp-controller="Dashboard" asp-action="Index">Manging Products</a></li>
+											</ul>
+										</li>
+									}
+
+								</ul>
+
+							</div>
+							<ul class="header-btn d-md-flex">
+								@if (!User.Identity.IsAuthenticated)
+								{
+									<li class="nav-item">
+										<a class="btn btn-outline-danger m-2" asp-area="" asp-controller="Account" asp-action="Login">SignIn</a>
+									</li>
+									<li class="nav-item">
+										<a class="btn btn-outline-danger m-2" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+									</li>
+								}
+								else
+								{
+									<li class="nav-item">
+										<a class="text-danger fw-bold m-2">Hello @User.Identity.Name</a>
+									</li>
+									<li class="nav-item">
+										<a class="btn btn-outline-danger m-2" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+									</li>
+								}
+							</ul>
+						</nav> <!-- navbar -->
 					</div>
 				</div> <!-- row -->
 			</div> <!-- container -->
@@ -86,7 +147,7 @@
 						<h1 class="text-white">All Categories</h1>
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item"><a asp-action="Index" asp-controller="Department">Home</a></li>
 								<li class="breadcrumb-item active" aria-current="page">Category</li>
 							</ol>
 						</nav>

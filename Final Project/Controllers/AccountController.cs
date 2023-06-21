@@ -82,6 +82,10 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Department");
+            }
             return View();
         }
         [HttpPost]
@@ -138,9 +142,6 @@ namespace Final_Project.Controllers
         //}
 
         #endregion
-
-
-
 
     }
 }

@@ -64,3 +64,11 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
+}

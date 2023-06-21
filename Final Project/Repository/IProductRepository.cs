@@ -11,7 +11,7 @@ namespace Final_Project.Repository
        
         void Delete(int id);
         void Add(Product newProduct, IFormFile imageFile);
-        void Update(Product newProduct, int id, IFormFile imageFile);
+        void Update(Product newProduct, int id, IFormFile? imageFile);
 
         List<Product> Search(string SearchName);
 

@@ -5,7 +5,8 @@ using Final_Project.Models;
 using Final_Project.Repository;
 
 namespace Final_Project.Controllers
-{// [Authorize(Roles =("Admin,SV")]
+{
+    [Authorize(Roles = "Admin,SV")]
     public class ProductController : Controller
     {
        
@@ -84,7 +85,7 @@ namespace Final_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEdit(int id, Product newprod , IFormFile imageFile)
+        public IActionResult SaveEdit(int id, Product newprod , IFormFile? imageFile)
         {
              Product oldcrs = ProductRepository.GetProductById(id);
             if (ModelState.IsValid)
@@ -107,6 +108,7 @@ namespace Final_Project.Controllers
             ProductRepository.Save();
             return RedirectToAction("Index", "Dashboard");
         }
+        [AllowAnonymous]
         public IActionResult Search(string query)
         {
 
@@ -121,8 +123,9 @@ namespace Final_Project.Controllers
                 return View("Index",prod);
           
                 }
-        }  
- 
+        }
+
+        [AllowAnonymous]
         public IActionResult GetProdByDept(int deptid)
         {
             List<Product> prod = ProductRepository.GetProductByDeptId(deptid);

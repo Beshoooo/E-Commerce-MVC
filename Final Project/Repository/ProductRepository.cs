@@ -52,7 +52,7 @@ namespace Final_Project.Repository
             return context.Products.Where(p=>p.Is_Deleted==0).FirstOrDefault(d => d.Id == id);
         }
 
-        public void Update(Product newProduct, int id, IFormFile imageFile)
+        public void Update(Product newProduct, int id, IFormFile? imageFile)
         {
             if (imageFile != null&&imageFile.Length>0)
             {
@@ -69,6 +69,7 @@ namespace Final_Project.Repository
             Product oldProduct= GetProductById(id);
             oldProduct.ProductName = newProduct.ProductName;
             oldProduct.Description = newProduct.Description;
+            oldProduct.Img = newProduct.Img;
             oldProduct.Price= newProduct.Price;
             oldProduct.DeptId= newProduct.DeptId;
         }

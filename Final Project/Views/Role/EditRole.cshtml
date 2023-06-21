@@ -5,7 +5,7 @@
 }
 
 <h3 class="display-4">Edit Role</h3>
-<form asp-controller="Role" asp-action="EditRole" method="post">
+<form asp-controller="Role" asp-action="EditRole" method="post" style="height:60vh">
 
     <div class="form-group mb-2">
         <label asp-for="RoleId" class="form-label"></label>
@@ -19,7 +19,15 @@
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-controller="Role" asp-action="ListRoles" class="btn btn-light">Cancel</a>
+    <button type="submit" class="btn btn-outline-warning">Update</button>
+    <a asp-controller="Role" asp-action="ListRoles" class="btn btn-outline-success">Cancel</a>
 
 </form>
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
+}

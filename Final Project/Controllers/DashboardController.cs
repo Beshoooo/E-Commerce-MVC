@@ -7,7 +7,7 @@ using Final_Project.ViewModelRepository;
 
 namespace Final_Project.Controllers
 {
-    // [Authorize(Roles =("Admin,SV")]
+    [Authorize(Roles ="Admin,SV")]
     public class DashboardController : Controller
     {
         IProductRepository ProductRepository;
@@ -30,6 +30,7 @@ namespace Final_Project.Controllers
             return View(departmentRepository.GetAll());
         }
 
+        [AllowAnonymous]
         public IActionResult Search(string query)
         {
 
@@ -47,6 +48,7 @@ namespace Final_Project.Controllers
 
             }
         }
+        [AllowAnonymous]
         public IActionResult SearchDepartment(string query)
         {
 

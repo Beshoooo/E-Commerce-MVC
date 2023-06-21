@@ -21,12 +21,13 @@ img {
   max-width: 100%;
 }
 
+
 a:focus,
 input:focus,
 textarea:focus,
 button:focus {
-  text-decoration: none;
-  outline: none;
+    text-decoration: none;
+    outline: none;
 }
 
 a:focus,

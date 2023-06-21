@@ -25,12 +25,15 @@
                 <input asp-for="Price" class="form-control" required />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group mb-5">
-                <label asp-for="Img" class="control-label"></label>
-                <input asp-for="Img" name="imageFile" type="file" class="form-control" accept="images/*" value="@Model.Img" />
+            <div class="form-group">
+                <label asp-for="Img" class="control-label" hidden></label>
+                <input asp-for="Img" class="form-control" hidden />
+                <span asp-validation-for="Img" class="text-danger"></span>
                 @*<input asp-for="Img" type="file" name="imageFile" id="imageFile" accept="images/*" onchange="updateFileName()" />*@
-                @if (!string.IsNullOrEmpty(Model.Img))
+                @if (string.IsNullOrEmpty(Model.Img))
                 {
+                    <label asp-for="Img" class="control-label"></label>
+                    <input asp-for="Img" type="text" name="imageFile" class="form-control" accept="images/*" value="@Model.Img" />
                     <p>Current Image:</p>
                     <img src="~/images/@Model.Img" style="width:250px ;height:200px" alt="Current Image" />
                 }
@@ -75,3 +78,11 @@
         </script>
 }
 
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
+}

@@ -45,3 +45,11 @@
     <a class="btn btn-outline-success" asp-action="Index">Back to All Products </a> | 
     <a class="btn btn-outline-success" asp-controller="Department" asp-action="Index">Back to Home </a>
 </div>
+@section Nav{
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Department" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="text-danger fw-bold m-2" asp-controller="Product" asp-action="Index">Shop</a>
+    </li>
+}

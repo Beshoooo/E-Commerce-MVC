@@ -7,10 +7,10 @@
 
 <h3 class="display-4">All Roles</h3>
 
-@if(Model.Any())
+@if (Model.Any())
 {
     <a asp-controller="Role" asp-action="CreateRole" class="btn btn-primary mb-3">Add New Role</a>
-    
+
     foreach (var role in Model)
     {
         <div class="card mb-2">
@@ -24,20 +24,20 @@
                 <form method="post" asp-controller="Role" asp-action="DeleteRole" asp-route-RoleId="@role.Id">
 
                     <a asp-controller="Role" asp-action="EditRole"
-                    asp-route-id="@role.Id" class="btn btn-primary">Edit</a>
-                    
-                    
+               asp-route-id="@role.Id" class="btn btn-primary">Edit</a>
+
+
                     <span id="DeleteSpan_@role.Id">
                         <a data-role-id="@role.Id" class="btn btn-danger delete">Delete</a>
                     </span>
 
 
-                    
+
                 </form>
             </div>
         </div>
     }
-   
+
 }
 else
 {
